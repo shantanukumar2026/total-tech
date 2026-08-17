@@ -104,7 +104,7 @@ const LIFECYCLE_STAGES = [
   }
 ];
 
-// 11 Core Domains
+// 12 Core Domains (Perfect 3x4 Grid Balance - Zero Empty Slots)
 const ECOSYSTEM_TAXONOMY = [
   {
     id: 'software',
@@ -248,6 +248,19 @@ const ECOSYSTEM_TAXONOMY = [
       'Data-Driven Decision Systems',
       'Energy-Efficient IT Architecture'
     ]
+  },
+  {
+    id: 'qa_automation',
+    index: 'PRACTICE // 12',
+    title: 'QA Engineering & Test Automation',
+    desc: 'Continuous automated test suites, performance benchmarking, stress load validation, and end-to-end SDLC verification.',
+    capabilities: [
+      'Automated Test Suites (Playwright & Cypress)',
+      'API & Microservices Contract Testing',
+      'High-Volume Performance & Stress Load Audits',
+      'Security & Vulnerability Penetration Tests',
+      '24/7 CI/CD Automated Test Pipelines'
+    ]
   }
 ];
 
@@ -255,7 +268,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [consultationSubmitted, setConsultationSubmitted] = useState(false);
 
-  // Real-time filtering across the 11 domains
+  // Real-time filtering across the 12 domains
   const filteredDomains = useMemo(() => {
     if (!searchQuery) return ECOSYSTEM_TAXONOMY;
     const q = searchQuery.toLowerCase();
@@ -392,7 +405,7 @@ export default function Home() {
       </section>
 
       {/* =========================================================================
-          SERVICES & CAPABILITIES DIRECTORY
+          SERVICES & CAPABILITIES DIRECTORY (12 BALANCED PRACTICE CARDS)
           ========================================================================= */}
       <section className={styles.ecosystemSection} id="services">
         <div className={styles.sectionContainer}>
@@ -406,7 +419,7 @@ export default function Home() {
             <div className={styles.searchBar}>
               <input
                 type="text"
-                placeholder="Search across all services (e.g., React, AI, AWS, Mobile)..."
+                placeholder="Search across all services (e.g., React, AI, AWS, QA, Mobile)..."
                 className={styles.searchInput}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -414,7 +427,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 11 Practice Grid */}
+          {/* 12 Practice Grid (3 Columns x 4 Rows) */}
           <div className={styles.ecosystemGrid}>
             {filteredDomains.map((domain) => (
               <div key={domain.id} className={styles.domainCard}>
@@ -686,6 +699,7 @@ export default function Home() {
                   <option>Robotics & Industrial Automation</option>
                   <option>Cloud Infrastructure & DevOps</option>
                   <option>Cybersecurity & Code Audits</option>
+                  <option>QA & Automated Test Engineering</option>
                   <option>Other Custom Technology Project</option>
                 </select>
               </div>
