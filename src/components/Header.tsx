@@ -159,9 +159,9 @@ export default function Header() {
         <Link href="/" className={styles.logoArea}>
           <div className={styles.logoWrapper}>
             <Image
-              src="/logo_corporate.png"
+              src="/logo_final_blue.png"
               alt="Total Tech Technologies"
-              width={300}
+              width={218}
               height={66}
               priority
               unoptimized
