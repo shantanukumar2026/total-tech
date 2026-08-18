@@ -120,7 +120,6 @@ const ECOSYSTEM_DOMAINS = [
 export default function Header() {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(0);
-  const [logoError, setLogoError] = useState(false);
   const menuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const openMenu = () => {
@@ -159,22 +158,15 @@ export default function Header() {
       <div className={styles.mainBar}>
         <Link href="/" className={styles.logoArea}>
           <div className={styles.logoWrapper}>
-            {!logoError ? (
-              <Image
-                src="/logo.png"
-                alt="Total Tech Technologies"
-                width={240}
-                height={54}
-                priority
-                unoptimized
-                className={styles.logoImg}
-                onError={() => setLogoError(true)}
-              />
-            ) : (
-              <div className={styles.logoFallback}>
-                TOTAL<span>TECH</span>
-              </div>
-            )}
+            <Image
+              src="/logo_corporate.png"
+              alt="Total Tech Technologies"
+              width={300}
+              height={66}
+              priority
+              unoptimized
+              className={styles.logoImg}
+            />
           </div>
         </Link>
 
