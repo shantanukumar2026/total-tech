@@ -161,7 +161,7 @@ export default function Header() {
             <Image
               src="/logo_final_blue.png"
               alt="Total Tech Technologies"
-              width={218}
+              width={313}
               height={66}
               priority
               unoptimized
