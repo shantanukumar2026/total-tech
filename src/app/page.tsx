@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './page.module.css';
@@ -227,11 +227,11 @@ const ECOSYSTEM_TAXONOMY = [
     id: 'enterprise_tech',
     index: 'PRACTICE // 10',
     title: 'Enterprise Systems & ERP',
-    desc: 'Modernization, integration, and custom workflow development for SAP, Salesforce, and ServiceNow.',
+    desc: 'Modernization, integration, and custom workflow development for enterprise ERP, CRM, and service platforms.',
     capabilities: [
-      'SAP Cloud Migration & Customization',
-      'Salesforce CRM Architecture & Workflows',
-      'ServiceNow Enterprise IT Management',
+      'ERP Cloud Migration & Customization',
+      'Enterprise CRM Architecture & Workflows',
+      'Enterprise Service Workflow Management',
       'Supply Chain & ERP Integrations',
       'Business Process Automation'
     ]
@@ -268,6 +268,52 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [consultationSubmitted, setConsultationSubmitted] = useState(false);
 
+  const [currentText, setCurrentText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(100);
+
+  const phrases = useMemo(() => [
+    'Manufacturing & Robotics',
+    'Financial Services & Banking',
+    'Healthcare & Life Sciences',
+    'High-Growth Technology',
+    'Retail & Supply Chain',
+    'Custom Software & Web Engineering',
+    'AI & Enterprise Data Solutions',
+    'Cloud Computing & DevOps',
+    'Cybersecurity & Compliance'
+  ], []);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    const currentPhrase = phrases[currentIndex];
+    
+    if (isDeleting) {
+      timer = setTimeout(() => {
+        setCurrentText(currentPhrase.substring(0, currentText.length - 1));
+        setTypingSpeed(45);
+      }, typingSpeed);
+    } else {
+      timer = setTimeout(() => {
+        setCurrentText(currentPhrase.substring(0, currentText.length + 1));
+        setTypingSpeed(95);
+      }, typingSpeed);
+    }
+
+    if (!isDeleting && currentText === currentPhrase) {
+      timer = setTimeout(() => {
+        setIsDeleting(true);
+      }, 1500);
+    } else if (isDeleting && currentText === '') {
+      setIsDeleting(false);
+      setCurrentIndex((prev) => (prev + 1) % phrases.length);
+      setTypingSpeed(200);
+    }
+
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, currentIndex, typingSpeed, phrases]);
+
   // Real-time filtering across the 12 domains
   const filteredDomains = useMemo(() => {
     if (!searchQuery) return ECOSYSTEM_TAXONOMY;
@@ -298,7 +344,11 @@ export default function Home() {
             </div>
 
             <h1 className={styles.heroTitle}>
-              Custom Software Engineering & Cloud <span>Transformation for Enterprise Scale.</span>
+              <span className={styles.taglineText}>One Single Platform to the Tech Universe</span>
+              <span className={styles.typewriterContainer}>
+                {currentText}
+                <span className={styles.cursor}>|</span>
+              </span>
             </h1>
 
             <p className={styles.heroSubtitle}>
@@ -746,75 +796,219 @@ export default function Home() {
           GLOBAL HUBS & CORPORATE FOOTER
           ========================================================================= */}
       <footer className={styles.footerSection}>
-        <div className={styles.footerGrid}>
-          {/* Brand Column */}
-          <div>
-            <div className={styles.footerBrandTitle}>
-              TOTAL<span>TECH</span>
+        <div className={styles.footerTopRow}>
+          {/* Brand Info */}
+          <div className={styles.footerBrandCol}>
+            <div className={styles.footerLogoContainer}>
+              <Image
+                src="/logo_final_blue.png"
+                alt="Total Tech Technologies"
+                width={180}
+                height={38}
+                style={{ filter: 'brightness(0) invert(1)' }}
+                priority
+                unoptimized
+              />
             </div>
-            <p style={{ fontSize: '13.5px', lineHeight: '1.65', maxWidth: '280px', marginBottom: '24px' }}>
-              Custom enterprise software engineering, AI solutions, robotics, and cloud consulting for American businesses.
+            <p className={styles.footerBrandDesc}>
+              Total Tech Technologies is the global authority dedicated to advancing enterprise IT systems, custom software, AI development, and cloud databases.
             </p>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--blue-100)' }}>
-              GLOBAL ENTERPRISE IT ARCHITECTURE & SOFTWARE CONSULTING
+          </div>
+
+          {/* Group Dedicated to Enterprise IT */}
+          <div className={styles.footerDedicatedCol}>
+            <h4 className={styles.dedicatedHeading}>OUR GROUP DEDICATED TO ENTERPRISE IT</h4>
+            <div className={styles.badgeRow}>
+              <span className={styles.groupBadge}>TOTAL TECH</span>
+              <span className={styles.groupBadge}>AWS</span>
+              <span className={styles.groupBadge}>AZURE</span>
+              <span className={styles.groupBadge}>GCP</span>
+              <span className={styles.groupBadge}>ERP</span>
+              <span className={styles.groupBadge}>CRM</span>
             </div>
           </div>
 
-          {/* Pillars 1-3 */}
-          <div>
-            <div className={styles.footerColTitle}>Engineering Services</div>
-            <ul className={styles.footerList}>
-              <li><Link href="#services" className={styles.footerLink}>Custom Web & Mobile</Link></li>
-              <li><Link href="#services" className={styles.footerLink}>AI & Machine Learning</Link></li>
-              <li><Link href="#services" className={styles.footerLink}>Robotics & Automation</Link></li>
-              <li><Link href="#services" className={styles.footerLink}>Cloud & DevOps</Link></li>
+          {/* Office Locations & Socials */}
+          <div className={styles.footerOfficesCol}>
+            <div className={styles.socialRow}>
+              <a href="#" className={styles.socialBtn} aria-label="Facebook">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+              </a>
+              <a href="#" className={styles.socialBtn} aria-label="Twitter">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+              </a>
+              <a href="#" className={styles.socialBtn} aria-label="YouTube">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.163c-.272-1.021-1.077-1.826-2.099-2.099-1.854-.5-9.4-.5-9.4-.5s-7.546 0-9.4.5c-1.021.273-1.826 1.077-2.099 2.099-.5 1.854-.5 9.401-.5 9.401s0 7.547.5 9.401c.273 1.022 1.078 1.826 2.099 2.099 1.854.5 9.4.5 9.4.5s7.547 0 9.4-.5c1.022-.273 1.826-1.077 2.099-2.099.5-1.854.5-9.4.5-9.4s0-7.547-.5-9.401zm-14.26 11.237v-10.8l7.087 5.4-7.087 5.4z"/></svg>
+              </a>
+              <a href="#" className={styles.socialBtn} aria-label="Instagram">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </a>
+              <a href="#" className={styles.socialBtn} aria-label="LinkedIn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+            </div>
+
+            <div className={styles.officeGrid}>
+              <div className={styles.officeItem}>
+                <span className={styles.officeTitle}>NY OFFICE</span>
+                <span className={styles.officeAddr}>105 MAXESS ROAD, MELVILLE, NY 11747</span>
+                <span className={styles.officePhone}>(631) 452-1111</span>
+              </div>
+              <div className={styles.officeItem}>
+                <span className={styles.officeTitle}>FL OFFICE</span>
+                <span className={styles.officeAddr}>850 NW FEDERAL HWY, STUART, FL 34994</span>
+                <span className={styles.officePhone}>(772) 297-0700</span>
+              </div>
+              <div className={styles.officeItem}>
+                <span className={styles.officeTitle}>CANADA OFFICE</span>
+                <span className={styles.officeAddr}>ONE YONGE STREET, TORONTO, ONTARIO M5E 1R4, CANADA</span>
+                <span className={styles.officePhone}>+1 (418) 805-9990</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Link Columns */}
+        <div className={styles.footerLinkColumns}>
+          {/* Column 1: SERVICES */}
+          <div className={styles.linkColumn}>
+            <div className={styles.columnHeader}>
+              <span className={styles.columnSquare}></span>
+              SERVICES
+            </div>
+            <ul className={styles.columnList}>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Custom Web Apps</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Mobile Applications</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Backend Engineering</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> API Integrations</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Database Design</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Cloud Infrastructure</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> DevOps Automation</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> UI/UX Product Design</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> QA & System Testing</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> SRE & Maintenance</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Legacy Refactoring</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> System Architecture</Link></li>
             </ul>
           </div>
 
-          {/* Pillars 4-6 */}
-          <div>
-            <div className={styles.footerColTitle}>Solutions</div>
-            <ul className={styles.footerList}>
-              <li><Link href="#services" className={styles.footerLink}>Cybersecurity Audits</Link></li>
-              <li><Link href="#services" className={styles.footerLink}>Enterprise ERP & CRM</Link></li>
-              <li><Link href="#services" className={styles.footerLink}>Database Architecture</Link></li>
-              <li><Link href="#services" className={styles.footerLink}>UI/UX Product Design</Link></li>
+          {/* Column 2: PRACTICES */}
+          <div className={styles.linkColumn}>
+            <div className={styles.columnHeader}>
+              <span className={styles.columnSquare}></span>
+              PRACTICES
+            </div>
+            <ul className={styles.columnList}>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Software Engineering</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Artificial Intelligence</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Machine Learning</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Robotics & ROS 2</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Embedded Firmware</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Industrial IoT</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Cybersecurity</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Zero-Trust Audits</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Compliance Readiness</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Enterprise ERP</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> ERP Platform Support</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> IT Workflows & ITSM</Link></li>
             </ul>
           </div>
 
-          {/* Navigation */}
-          <div>
-            <div className={styles.footerColTitle}>Company</div>
-            <ul className={styles.footerList}>
-              <li><Link href="#services" className={styles.footerLink}>Services</Link></li>
-              <li><Link href="#case-studies" className={styles.footerLink}>Case Studies</Link></li>
-              <li><Link href="#standards" className={styles.footerLink}>Standards & Security</Link></li>
-              <li><Link href="#contact" className={styles.footerLink}>Contact Us</Link></li>
+          {/* Column 3: INDUSTRIES */}
+          <div className={styles.linkColumn}>
+            <div className={styles.columnHeader}>
+              <span className={styles.columnSquare}></span>
+              INDUSTRIES
+            </div>
+            <ul className={styles.columnList}>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Financial Services</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Healthcare & Life Sciences</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Manufacturing & Robotics</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> High-Growth Startups</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Retail & E-Commerce</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Logistics & Supply Chain</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Energy & Utilities</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Public Sector & Gov</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Telecommunications</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Education Technology</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Media & Entertainment</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Professional Services</Link></li>
             </ul>
           </div>
 
-          {/* US Contact Info */}
-          <div>
-            <div className={styles.footerColTitle}>Get in Touch</div>
-            <ul className={styles.footerList}>
-              <li><span style={{ color: '#FFFFFF', fontWeight: 600 }}>Advisory:</span> Enterprise Client Intake</li>
-              <li><span style={{ color: '#FFFFFF', fontWeight: 600 }}>Phone:</span> +1 (800) 840-TECH</li>
-              <li><span style={{ color: '#FFFFFF', fontWeight: 600 }}>Email:</span> hello@totaltech.io</li>
-              <li style={{ marginTop: '8px' }}>
-                <a href="#contact" style={{ color: 'var(--blue-300)', fontSize: '13px', fontWeight: 700 }}>
-                  → Schedule Consultation
-                </a>
-              </li>
+          {/* Column 4: RESOURCES */}
+          <div className={styles.linkColumn}>
+            <div className={styles.columnHeader}>
+              <span className={styles.columnSquare}></span>
+              RESOURCES
+            </div>
+            <ul className={styles.columnList}>
+              <li><Link href="#resources" className={styles.columnLink}><span>+</span> Technical Case Studies</Link></li>
+              <li><Link href="#resources" className={styles.columnLink}><span>+</span> Whitepapers & Reports</Link></li>
+              <li><Link href="#resources" className={styles.columnLink}><span>+</span> Engineering Blog</Link></li>
+              <li><Link href="#resources" className={styles.columnLink}><span>+</span> Open Source Projects</Link></li>
+              <li><Link href="#resources" className={styles.columnLink}><span>+</span> Documentation Portal</Link></li>
+              <li><Link href="#resources" className={styles.columnLink}><span>+</span> Client Portal Access</Link></li>
+              <li><Link href="#resources" className={styles.columnLink}><span>+</span> Architecture Blueprints</Link></li>
+              <li><Link href="#resources" className={styles.columnLink}><span>+</span> API Reference Docs</Link></li>
+              <li><Link href="#resources" className={styles.columnLink}><span>+</span> Security Advisories</Link></li>
+              <li><Link href="#resources" className={styles.columnLink}><span>+</span> Status & Monitoring</Link></li>
+              <li><Link href="#resources" className={styles.columnLink}><span>+</span> Learning Center</Link></li>
+              <li><Link href="#resources" className={styles.columnLink}><span>+</span> Technology Glossary</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 5: COMPANY */}
+          <div className={styles.linkColumn}>
+            <div className={styles.columnHeader}>
+              <span className={styles.columnSquare}></span>
+              COMPANY
+            </div>
+            <ul className={styles.columnList}>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> About Total Tech</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Leadership & Team</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Global Office Hubs</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Career Opportunities</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Brand & Media Kit</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Partner Ecosystem</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Newsroom & Press</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Sustainability Goals</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Research Lab</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Investor Relations</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Community Initiatives</Link></li>
+              <li><Link href="#services" className={styles.columnLink}><span>+</span> Contact Enterprise</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 6: GOVERNANCE */}
+          <div className={styles.linkColumn}>
+            <div className={styles.columnHeader}>
+              <span className={styles.columnSquare}></span>
+              GOVERNANCE
+            </div>
+            <ul className={styles.columnList}>
+              <li><Link href="#standards" className={styles.columnLink}><span>+</span> Security Standards</Link></li>
+              <li><Link href="#standards" className={styles.columnLink}><span>+</span> Data Privacy Compliance</Link></li>
+              <li><Link href="#standards" className={styles.columnLink}><span>+</span> SOC2 Assurance</Link></li>
+              <li><Link href="#standards" className={styles.columnLink}><span>+</span> HIPAA Compliance</Link></li>
+              <li><Link href="#standards" className={styles.columnLink}><span>+</span> ISO 27001 Audits</Link></li>
+              <li><Link href="#standards" className={styles.columnLink}><span>+</span> GDPR/CCPA Policy</Link></li>
+              <li><Link href="#standards" className={styles.columnLink}><span>+</span> Terms of Service</Link></li>
+              <li><Link href="#standards" className={styles.columnLink}><span>+</span> Privacy Statement</Link></li>
+              <li><Link href="#standards" className={styles.columnLink}><span>+</span> Non-Disclosure Terms</Link></li>
+              <li><Link href="#standards" className={styles.columnLink}><span>+</span> Vendor Requirements</Link></li>
+              <li><Link href="#standards" className={styles.columnLink}><span>+</span> Service Level Agreements</Link></li>
+              <li><Link href="#standards" className={styles.columnLink}><span>+</span> Vulnerability Disclosure</Link></li>
             </ul>
           </div>
         </div>
 
+        {/* Footer Bottom Bar */}
         <div className={styles.footerBottom}>
           <div>© 2026 Total Tech Technologies Inc. All rights reserved.</div>
           <div style={{ display: 'flex', gap: '24px' }}>
             <span>Privacy Policy</span>
             <span>Terms of Service</span>
-            <span>Security Statement</span>
           </div>
         </div>
       </footer>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Header.module.css';
 
-// 6 Core US Enterprise IT Practices
+// 6 Core US Enterprise IT Practices with rich corporate descriptions
 const ECOSYSTEM_DOMAINS = [
   {
     id: 'software',
@@ -13,15 +13,30 @@ const ECOSYSTEM_DOMAINS = [
     groups: [
       {
         title: 'Web & Applications',
-        links: ['Next.js & React Enterprise', 'Node.js & Python Backend', 'Modern Web Platforms', 'API & Microservices']
+        links: [
+          { name: 'Next.js & React Enterprise', desc: 'Scalable, high-performance web frontends.' },
+          { name: 'Node.js & Python Backend', desc: 'Secure backend APIs and distributed services.' },
+          { name: 'Modern Web Platforms', desc: 'Edge-rendered, search-optimized web apps.' },
+          { name: 'API & Microservices', desc: 'Event-driven and real-time backend links.' }
+        ]
       },
       {
         title: 'Mobile Development',
-        links: ['iOS Apps (Swift)', 'Android Apps (Kotlin)', 'Cross-Platform Mobile', 'Enterprise Apps']
+        links: [
+          { name: 'iOS Apps (Swift)', desc: 'Premium, native iOS products built with SwiftUI.' },
+          { name: 'Android Apps (Kotlin)', desc: 'High-performance native Android applications.' },
+          { name: 'Cross-Platform Mobile', desc: 'React Native & Flutter mobile app solutions.' },
+          { name: 'Enterprise Apps', desc: 'Offline sync, secure storage, and MDM integration.' }
+        ]
       },
       {
         title: 'Custom Engineering',
-        links: ['Full-Stack Systems', 'Cloud Migration', 'Legacy Modernization', 'Database Architecture']
+        links: [
+          { name: 'Full-Stack Systems', desc: 'End-to-end custom application engineering.' },
+          { name: 'Cloud Migration', desc: 'Seamless migration of legacy logic to cloud.' },
+          { name: 'Legacy Modernization', desc: 'Refactoring monoliths into microservices.' },
+          { name: 'Database Architecture', desc: 'High-availability SQL and vector databases.' }
+        ]
       }
     ]
   },
@@ -31,15 +46,30 @@ const ECOSYSTEM_DOMAINS = [
     groups: [
       {
         title: 'Artificial Intelligence',
-        links: ['Custom Enterprise LLMs', 'AI Agents & Automation', 'Document Intelligence', 'Model Integration']
+        links: [
+          { name: 'Custom Enterprise LLMs', desc: 'Fine-tuned private models trained on your data.' },
+          { name: 'AI Agents & Automation', desc: 'Autonomous workflows and task automation.' },
+          { name: 'Document Intelligence', desc: 'Automated data extraction from PDFs and sheets.' },
+          { name: 'Model Integration', desc: 'Deploying custom weights to production APIs.' }
+        ]
       },
       {
         title: 'Computer Vision',
-        links: ['Object Detection', 'Visual Quality Inspection', 'OCR & Document Scanning', 'Image Recognition']
+        links: [
+          { name: 'Object Detection', desc: 'Real-time object tracking and segmentation.' },
+          { name: 'Visual Quality Inspection', desc: 'Automated defect detection on assembly lines.' },
+          { name: 'OCR & Document Scanning', desc: 'High-accuracy text recognition and parsing.' },
+          { name: 'Image Recognition', desc: 'Custom classification and search indexing.' }
+        ]
       },
       {
         title: 'Data & Analytics',
-        links: ['Data Warehousing & BI', 'Real-Time Data Pipelines', 'Predictive Analytics', 'Reporting Dashboards']
+        links: [
+          { name: 'Data Warehousing & BI', desc: 'Snowflake & Databricks pipelines.' },
+          { name: 'Real-Time Data Pipelines', desc: 'High-throughput Kafka streaming services.' },
+          { name: 'Predictive Analytics', desc: 'Forecasting demand using machine learning.' },
+          { name: 'Reporting Dashboards', desc: 'Executive BI dashboards and visual portals.' }
+        ]
       }
     ]
   },
@@ -49,15 +79,30 @@ const ECOSYSTEM_DOMAINS = [
     groups: [
       {
         title: 'Industrial Automation',
-        links: ['Warehouse Automation', 'Robotics Software (ROS 2)', 'Machine Integration', 'Automated Logistics']
+        links: [
+          { name: 'Warehouse Automation', desc: 'Fleet coordination and sorting logistics.' },
+          { name: 'Robotics Software (ROS 2)', desc: 'Navigation, mapping, and control algorithms.' },
+          { name: 'Machine Integration', desc: 'Connecting PLCs and SCADA networks.' },
+          { name: 'Automated Logistics', desc: 'Autonomous guided vehicles (AGVs) logic.' }
+        ]
       },
       {
         title: 'Embedded Systems',
-        links: ['Firmware Development', 'Microcontroller Logic', 'Hardware Prototyping', 'Real-Time Control']
+        links: [
+          { name: 'Firmware Development', desc: 'Real-time microcontroller firmware (C/C++).' },
+          { name: 'Microcontroller Logic', desc: 'Custom drivers and protocol handling.' },
+          { name: 'Hardware Prototyping', desc: 'PCB selection and system architecture.' },
+          { name: 'Real-Time Control', desc: 'Low-latency loop control and sensor fusion.' }
+        ]
       },
       {
         title: 'IoT Networks',
-        links: ['Industrial IoT (IIoT)', 'Smart Sensor Arrays', 'Fleet Telematics', 'Facility Monitoring']
+        links: [
+          { name: 'Industrial IoT (IIoT)', desc: 'Deploying smart sensor networks in factories.' },
+          { name: 'Smart Sensor Arrays', desc: 'Environmental and condition monitoring.' },
+          { name: 'Fleet Telematics', desc: 'Asset tracking, fuel logging, and diagnostics.' },
+          { name: 'Facility Monitoring', desc: 'Proactive maintenance alerts and heatmaps.' }
+        ]
       }
     ]
   },
@@ -67,15 +112,30 @@ const ECOSYSTEM_DOMAINS = [
     groups: [
       {
         title: 'Cloud Infrastructure',
-        links: ['AWS, Azure & Google Cloud', 'Kubernetes & Docker', 'Serverless Systems', 'Hybrid Cloud Setup']
+        links: [
+          { name: 'AWS, Azure & Google Cloud', desc: 'Multi-cloud strategy and network design.' },
+          { name: 'Kubernetes & Docker', desc: 'Container scheduling and cluster configuration.' },
+          { name: 'Serverless Systems', desc: 'Cost-optimized Lambda and Cloud Functions.' },
+          { name: 'Hybrid Cloud Setup', desc: 'Secure connection to on-prem data centers.' }
+        ]
       },
       {
         title: 'DevOps & CI/CD',
-        links: ['Automated Deployment', 'Infrastructure as Code', '24/7 Monitoring & SRE', 'Disaster Recovery']
+        links: [
+          { name: 'Automated Deployment', desc: 'GitOps pipelines for zero-downtime releases.' },
+          { name: 'Infrastructure as Code', desc: 'Terraform, Ansible, and CloudFormation setups.' },
+          { name: '24/7 Monitoring & SRE', desc: 'Datadog & Prometheus alerts management.' },
+          { name: 'Disaster Recovery', desc: 'Automated backup validation and recovery runbooks.' }
+        ]
       },
       {
         title: 'Network Systems',
-        links: ['Enterprise Networking', 'SD-WAN Setup', 'VPN & Remote Access', 'Load Balancing']
+        links: [
+          { name: 'Enterprise Networking', desc: 'Sleek routing, firewalls, and SD-WAN setups.' },
+          { name: 'SD-WAN Setup', desc: 'Branch-office connection and WAN routing.' },
+          { name: 'VPN & Remote Access', desc: 'Zero-trust remote worker connectivity.' },
+          { name: 'Load Balancing', desc: 'Traffic optimization and geographical failovers.' }
+        ]
       }
     ]
   },
@@ -85,15 +145,30 @@ const ECOSYSTEM_DOMAINS = [
     groups: [
       {
         title: 'Security Audits',
-        links: ['Penetration Testing', 'Vulnerability Assessments', 'Security Auditing', 'Code Review']
+        links: [
+          { name: 'Penetration Testing', desc: 'Offensive audits to find infrastructure security gaps.' },
+          { name: 'Vulnerability Assessments', desc: 'Continuous code scanning and threat audits.' },
+          { name: 'Security Auditing', desc: 'Reviewing access control and storage compliance.' },
+          { name: 'Code Review', desc: 'Static analysis to find cryptographic issues.' }
+        ]
       },
       {
         title: 'Zero-Trust Defense',
-        links: ['Identity & Access (IAM)', 'End-to-End Encryption', 'Network Segmentation', 'Endpoint Security']
+        links: [
+          { name: 'Identity & Access (IAM)', desc: 'Single Sign-On (SSO) and Multi-Factor Auth.' },
+          { name: 'End-to-End Encryption', desc: 'Securing data transit and rest storage.' },
+          { name: 'Network Segmentation', desc: 'Preventing lateral movement of threats.' },
+          { name: 'Endpoint Security', desc: 'Securing employee laptops and mobile systems.' }
+        ]
       },
       {
         title: 'Compliance & Risk',
-        links: ['SOC2 Type II Readiness', 'ISO 27001 Compliance', 'HIPAA Security', 'Data Privacy (GDPR/CCPA)']
+        links: [
+          { name: 'SOC2 Type II Readiness', desc: 'Auditing and gap analysis for compliance.' },
+          { name: 'ISO 27001 Compliance', desc: 'Information Security Management System Setup.' },
+          { name: 'HIPAA Security', desc: 'Securing Protected Health Information (PHI).' },
+          { name: 'Data Privacy (GDPR/CCPA)', desc: 'Managing user consent and data erasure requests.' }
+        ]
       }
     ]
   },
@@ -103,15 +178,30 @@ const ECOSYSTEM_DOMAINS = [
     groups: [
       {
         title: 'Business Platforms',
-        links: ['SAP Cloud Integration', 'Salesforce CRM Setup', 'ERP Customization', 'Supply Chain Tech']
+        links: [
+          { name: 'ERP Cloud Integration', desc: 'Connecting enterprise ERP systems to custom services.' },
+          { name: 'Enterprise CRM Setup', desc: 'Custom CRM workflows and dashboard setups.' },
+          { name: 'ERP Customization', desc: 'Tailoring business management logic to match processes.' },
+          { name: 'Supply Chain Tech', desc: 'Tracking warehousing, orders, and logistics.' }
+        ]
       },
       {
         title: 'IT Consulting',
-        links: ['Digital Transformation', 'IT Strategy & Advisory', 'ServiceNow Enterprise', 'Vendor Management']
+        links: [
+          { name: 'Digital Transformation', desc: 'Modernizing corporate operations via software.' },
+          { name: 'IT Strategy & Advisory', desc: 'Roadmaps and vendor selection guidance.' },
+          { name: 'IT Service Management', desc: 'Configuring enterprise IT service workflows.' },
+          { name: 'Vendor Management', desc: 'SLA auditing and contract review metrics.' }
+        ]
       },
       {
         title: 'Emerging Tech',
-        links: ['Digital Twins', 'Smart Automation', 'Web3 & Blockchain', 'Green IT Solutions']
+        links: [
+          { name: 'Digital Twins', desc: 'Sleek visual simulations of physical factories.' },
+          { name: 'Smart Automation', desc: 'Custom scripting for back-office paperwork.' },
+          { name: 'Web3 & Blockchain', desc: 'Private distributed ledgers for consortiums.' },
+          { name: 'Green IT Solutions', desc: 'Optimizing infrastructure carbon footprint.' }
+        ]
       }
     ]
   }
@@ -120,6 +210,7 @@ const ECOSYSTEM_DOMAINS = [
 export default function Header() {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
   const menuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const openMenu = () => {
@@ -135,7 +226,12 @@ export default function Header() {
   };
 
   useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 15);
+    };
+    window.addEventListener('scroll', handleScroll);
     return () => {
+      window.removeEventListener('scroll', handleScroll);
       if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
     };
   }, []);
@@ -143,17 +239,7 @@ export default function Header() {
   const activeCategoryData = ECOSYSTEM_DOMAINS[selectedCategory];
 
   return (
-    <header className={styles.headerContainer}>
-      {/* Top US Corporate Bar */}
-      <div className={styles.topBar}>
-        <div className={styles.topBarLeft}>
-          <span>TOTAL TECH TECHNOLOGIES // USA ENTERPRISE IT CONSULTING</span>
-        </div>
-        <div className={styles.topBarRight}>
-          <span>ENTERPRISE TECHNOLOGY CONSULTING & SOFTWARE ENGINEERING</span>
-        </div>
-      </div>
-
+    <header className={`${styles.headerContainer} ${isScrolled ? styles.scrolled : ''}`}>
       {/* Main Corporate Bar */}
       <div className={styles.mainBar}>
         <Link href="/" className={styles.logoArea}>
@@ -161,8 +247,8 @@ export default function Header() {
             <Image
               src="/logo_final_blue.png"
               alt="Total Tech Technologies"
-              width={313}
-              height={66}
+              width={180}
+              height={38}
               priority
               unoptimized
               className={styles.logoImg}
@@ -178,32 +264,32 @@ export default function Header() {
             onMouseLeave={closeMenuWithDelay}
             onClick={() => setMegaMenuOpen(!megaMenuOpen)}
           >
-            <span>SERVICES</span>
+            <span>Services</span>
             <svg style={{ marginLeft: '6px' }} width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
               <path d="m6 9 6 6 6-6" />
             </svg>
           </div>
 
           <Link href="#case-studies" className={styles.navItem}>
-            CASE STUDIES
+            Case Studies
           </Link>
 
           <Link href="#standards" className={styles.navItem}>
-            STANDARDS & SECURITY
+            Standards & Security
           </Link>
 
           <Link href="#contact" className={styles.navItem}>
-            CONTACT US
+            Contact Us
           </Link>
         </nav>
 
         {/* Header Actions */}
         <div className={styles.headerActions}>
           <a href="#contact" className={styles.portalBtn}>
-            CLIENT PORTAL
+            Client Portal
           </a>
           <a href="#contact" className={styles.consultBtn}>
-            GET IN TOUCH
+            Get in Touch
           </a>
         </div>
 
@@ -241,7 +327,7 @@ export default function Header() {
                     {grp.links.map((link, lIndex) => (
                       <li key={lIndex}>
                         <Link href="#services" className={styles.serviceLink} onClick={() => setMegaMenuOpen(false)}>
-                          {link}
+                          <div className={styles.linkTitle}>{link.name}</div>
                         </Link>
                       </li>
                     ))}

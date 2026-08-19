@@ -58,7 +58,7 @@
 .heroTitle {
   font-family: var(--font-heading) !important;
   font-size: 3.7rem;
-  line-height: 1.12 !important;
+  line-height: 1.25 !important;
   letter-spacing: -0.035em !important;
   color: var(--blue-800);
   margin-bottom: 24px;
@@ -66,9 +66,42 @@
   text-transform: none !important;
 }
 
-.heroTitle span {
-  color: var(--blue-500);
-  font-weight: 550 !important;
+.taglineText {
+  color: var(--blue-500); /* Vibrant cobalt brand blue */
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 800 !important; /* Bold, strong corporate weight */
+  text-transform: none;
+  letter-spacing: -0.04em;
+  margin-bottom: 10px;
+  font-family: var(--font-heading) !important;
+  line-height: 1.15;
+}
+
+.typewriterContainer {
+  color: var(--blue-400); /* Bright, strong light blue (not dark/dull) */
+  display: block;
+  font-weight: 800 !important;
+  min-height: 1.25em; /* Avoid layout shifts when clearing text */
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 6px;
+  width: 10px;
+  height: 0.85em;
+  background-color: var(--blue-400); /* Match typewriter color */
+  vertical-align: middle;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .heroSubtitle {
@@ -728,70 +761,218 @@
    CORPORATE FOOTER (DEEP ROYAL LOGO BLUE)
    ========================================================================= */
 .footerSection {
-  background: var(--blue-900);
-  color: var(--blue-100);
-  padding: 80px 4vw 40px;
+  background: #003E99; /* Deep, rich corporate blue */
+  color: #FFFFFF;
+  padding: 60px 4vw 40px;
+  font-family: var(--font-body);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.footerGrid {
-  max-width: 1440px;
-  margin: 0 auto;
+.footerTopRow {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+  grid-template-columns: 1.2fr 1fr 1.3fr;
   gap: 48px;
-  margin-bottom: 64px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 48px;
 }
 
-.footerBrandTitle {
+.footerBrandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footerLogoContainer {
+  height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.footerBrandDesc {
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 320px;
+  margin: 0;
+}
+
+.footerDedicatedCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
+}
+
+.dedicatedHeading {
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  margin: 0;
   font-family: var(--font-heading);
-  font-size: 24px;
+}
+
+.badgeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 300px;
+}
+
+.groupBadge {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  padding: 6px 12px;
+  font-size: 10.5px;
   font-weight: 700;
-  color: #FFFFFF;
-  margin-bottom: 14px;
-  text-transform: uppercase;
-}
-
-.footerBrandTitle span {
-  color: var(--blue-300);
-}
-
-.footerColTitle {
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 600;
-  color: #FFFFFF;
-  text-transform: uppercase;
-  margin-bottom: 18px;
+  letter-spacing: 0.04em;
 }
 
-.footerList {
+.footerOfficesCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-end;
+}
+
+.socialRow {
+  display: flex;
+  gap: 10px;
+}
+
+.socialBtn {
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.socialBtn:hover {
+  background: #FFFFFF;
+  color: #003E99;
+  transform: translateY(-2px);
+}
+
+.officeGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-end;
+  text-align: right;
+  width: 100%;
+}
+
+.officeItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.officeTitle {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+  font-family: var(--font-heading);
+}
+
+.officeAddr {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+  font-family: var(--font-mono);
+}
+
+.officePhone {
+  font-size: 11px;
+  color: var(--blue-300);
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.footerLinkColumns {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.linkColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.columnHeader {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+}
+
+.columnSquare {
+  width: 6px;
+  height: 6px;
+  background: var(--blue-300);
+  display: inline-block;
+}
+
+.columnList {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  font-size: 13.5px;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
 }
 
-.footerLink {
-  color: var(--blue-100);
-  transition: color 0.15s ease;
+.columnLink {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  line-height: 1.35;
+  font-weight: 500;
 }
 
-.footerLink:hover {
+.columnLink span {
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 400;
+}
+
+.columnLink:hover {
   color: #FFFFFF;
+  transform: translateX(3px);
 }
 
 .footerBottom {
-  max-width: 1440px;
-  margin: 0 auto;
-  border-top: 1px solid rgba(0, 163, 255, 0.15);
-  padding-top: 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12.5px;
-  flex-wrap: wrap;
-  gap: 16px;
+  padding-top: 30px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 @media (max-width: 1024px) {
@@ -813,8 +994,20 @@
   .govGrid {
     grid-template-columns: 1fr;
   }
-  .footerGrid {
-    grid-template-columns: 1fr 1fr;
+  .footerTopRow {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .footerOfficesCol {
+    align-items: flex-start;
+  }
+  .officeGrid {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .footerLinkColumns {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
   }
 }
 
@@ -837,7 +1030,13 @@
   .formGrid {
     grid-template-columns: 1fr;
   }
-  .footerGrid {
-    grid-template-columns: 1fr;
+  .footerLinkColumns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .footerBottom {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
   }
 }
