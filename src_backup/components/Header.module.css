@@ -1,64 +1,50 @@
 .headerContainer {
   position: fixed;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 92vw;
-  max-width: 1340px;
-  z-index: 1000;
-  background: #FFFFFF; /* Solid White */
-  border: 1px solid rgba(0, 82, 204, 0.12); /* Clean border divider */
-  border-radius: 40px;
-  box-shadow: 0 10px 30px rgba(10, 25, 56, 0.04);
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: visible;
-}
-
-.headerContainer.scrolled {
   top: 0;
   left: 0;
-  transform: translateX(0);
   width: 100vw;
-  max-width: 100%;
-  background: #FFFFFF; /* Solid White */
-  border-left: none;
-  border-right: none;
-  border-top: none;
+  z-index: 1000;
+  background: #FFFFFF;
   border-bottom: 1px solid var(--border-subtle);
-  border-radius: 0;
-  box-shadow: 0 4px 20px rgba(10, 25, 56, 0.05);
+  box-shadow: 0 4px 24px rgba(10, 25, 56, 0.05);
 }
 
-/* Top Corporate Bar - Deactivated for floating capsule layout */
+/* Top Corporate Bar */
 .topBar {
-  display: none !important;
+  background: var(--blue-900);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 10.5px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  padding: 8px 4vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .topBarLeft {
-  display: none !important;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .topBarRight {
-  display: none !important;
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
 /* Main Navigation Bar */
 .mainBar {
   width: 100%;
-  height: 74px;
-  padding: 0 24px 0 30px;
+  height: 90px;
+  padding: 0 4vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: #FFFFFF;
   position: relative;
-  border-radius: 40px;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.headerContainer.scrolled .mainBar {
-  height: 64px; /* Slimmer layout on scroll */
-  border-radius: 0;
-  padding: 0 4vw; /* Align cleanly with body margins */
 }
 
 .logoArea {
@@ -70,85 +56,72 @@
 }
 
 .logoWrapper {
-  width: auto;
-  max-width: 320px;
-  height: 56px;
+  width: 313px;
+  height: 66px;
   display: flex;
   align-items: center;
 }
 
 .logoImg {
-  width: auto;
-  height: 56px;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: left center;
 }
 
-.headerContainer.scrolled .logoWrapper {
-  height: 46px;
-}
-
-.headerContainer.scrolled .logoImg {
-  height: 46px;
-}
-
 .navMenu {
   display: flex;
+  height: 100%;
   align-items: center;
-  gap: 4px;
-  background: rgba(0, 82, 204, 0.03);
-  border: 1px solid rgba(0, 82, 204, 0.08);
-  padding: 4px;
-  border-radius: 30px;
+  gap: 16px;
   white-space: nowrap;
   flex: none;
   justify-content: center;
 }
 
 .navItem {
-  height: 36px;
+  height: 100%;
   display: flex;
   align-items: center;
   padding: 0 16px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  color: var(--blue-800);
+  color: var(--color-text-title); /* Crisp Black */
   cursor: pointer;
-  border-radius: 20px;
-  transition: all 0.25s ease;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
   position: relative;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   white-space: nowrap;
   font-family: var(--font-heading);
 }
 
 .navItem:hover {
-  background: var(--blue-505, var(--blue-500));
-  color: #FFFFFF;
+  color: var(--blue-500);
+  border-bottom-color: var(--blue-500);
+  background: var(--blue-50);
 }
 
 .navItem.active {
-  background: var(--blue-500);
-  color: #FFFFFF;
+  color: var(--blue-500);
+  border-bottom-color: var(--blue-500);
 }
 
-/* Floating Dropdown Mega Menu */
+/* Spacious Full-Width Corporate Mega-Menu */
 .megaMenuFull {
   position: absolute;
-  top: 100%;
-  margin-top: 12px;
+  top: 90px;
   left: 0;
-  width: 100%;
-  background: #FFFFFF; /* Solid White */
-  border: 1px solid rgba(0, 82, 204, 0.12);
-  border-radius: 24px;
-  box-shadow: 0 24px 64px rgba(10, 25, 56, 0.08);
-  padding: 32px;
+  width: 100vw;
+  background: #FFFFFF;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 3px solid var(--blue-500);
+  box-shadow: 0 32px 64px rgba(10, 25, 56, 0.1);
+  padding: 44px 4vw 48px;
   visibility: hidden;
   opacity: 0;
-  transform: translateY(8px);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-4px);
+  transition: all 0.2s ease;
   pointer-events: none;
   z-index: 100;
 }
@@ -158,15 +131,6 @@
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
-}
-
-.headerContainer.scrolled .megaMenuFull {
-  margin-top: 0;
-  border-radius: 0 0 24px 24px;
-  border-left: none;
-  border-right: none;
-  border-top: 1px solid var(--border-subtle);
-  background: #FFFFFF; /* Solid White */
 }
 
 .megaContentWrapper {
@@ -188,30 +152,26 @@
 .megaCategoryBtn {
   text-align: left;
   background: transparent;
-  border-top: 1px solid transparent;
-  border-bottom: 1px solid transparent;
-  border-right: 1px solid transparent;
-  border-left: 3px solid transparent; /* left indicator bar */
-  padding: 10px 14px;
+  border: 1px solid transparent;
+  padding: 13px 18px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--blue-800);
+  color: var(--color-text-body); /* Crisp Black */
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: var(--font-heading);
   line-height: 1.45;
   gap: 14px;
-  border-radius: 6px;
 }
 
 .megaCategoryBtn:hover,
 .megaCategoryBtn.selectedCategory {
-  background: var(--blue-50);
-  color: var(--blue-500);
-  border-left-color: var(--blue-500);
+  background: var(--blue-800);
+  color: #FFFFFF;
+  border-color: var(--blue-800);
 }
 
 .megaGridServices {
@@ -236,48 +196,40 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px; /* Precision tight spacing */
+  gap: 16px;
 }
 
 .serviceLink {
-  text-decoration: none;
-  display: inline-block;
-  padding: 4px 0;
-  transition: all 0.2s ease;
-}
-
-.serviceLink:hover {
-  transform: translateX(3px);
-}
-
-.linkTitle {
   font-size: 13.5px;
-  font-weight: 600;
-  color: var(--blue-800);
-  transition: color 0.2s ease;
-  line-height: 1.4;
-  position: relative;
+  color: var(--color-text-body); /* Crisp Black Text */
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
   display: inline-block;
+  width: fit-content;
+  line-height: 1.65;
+  padding: 2px 0;
+  position: relative;
 }
 
-.linkTitle::after {
+.serviceLink::after {
   content: '';
   position: absolute;
   width: 100%;
   transform: scaleX(0);
-  height: 1.5px;
-  bottom: -2px;
+  height: 2px;
+  bottom: 0;
   left: 0;
   background-color: var(--blue-500);
   transform-origin: bottom right;
   transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.serviceLink:hover .linkTitle {
-  color: var(--blue-505, var(--blue-500));
+.serviceLink:hover {
+  color: var(--blue-500);
+  transform: translateX(4px);
 }
 
-.serviceLink:hover .linkTitle::after {
+.serviceLink:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
@@ -349,16 +301,17 @@
   font-weight: 700;
   color: var(--blue-800);
   background: transparent;
-  padding: 10px 18px;
+  border: 1px solid var(--border-strong);
+  padding: 10px 16px;
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
   font-family: var(--font-heading);
-  border-radius: 20px;
 }
 
 .portalBtn:hover {
-  color: var(--blue-505, var(--blue-500));
+  border-color: var(--blue-500);
+  color: var(--blue-500);
   background: var(--blue-50);
 }
 
@@ -368,21 +321,17 @@
   color: #FFFFFF;
   background: var(--blue-500);
   border: 1px solid var(--blue-500);
-  padding: 10px 22px;
-  border-radius: 24px; /* Pill button */
+  padding: 10px 20px;
   cursor: pointer;
   transition: all 0.2s ease;
   letter-spacing: 0.02em;
   white-space: nowrap;
   font-family: var(--font-heading);
-  box-shadow: 0 4px 14px rgba(0, 82, 204, 0.15);
 }
 
 .consultBtn:hover {
-  background: var(--blue-700);
-  border-color: var(--blue-700);
-  box-shadow: 0 6px 20px rgba(0, 82, 204, 0.25);
-  transform: translateY(-1px);
+  background: var(--blue-800);
+  border-color: var(--blue-800);
 }
 
 @media (max-width: 1100px) {

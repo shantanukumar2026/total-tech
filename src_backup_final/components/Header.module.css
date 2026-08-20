@@ -45,8 +45,8 @@
 /* Main Navigation Bar */
 .mainBar {
   width: 100%;
-  height: 74px;
-  padding: 0 24px 0 30px;
+  height: 68px;
+  padding: 0 20px 0 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -56,7 +56,7 @@
 }
 
 .headerContainer.scrolled .mainBar {
-  height: 64px; /* Slimmer layout on scroll */
+  height: 60px; /* Slimmer layout on scroll */
   border-radius: 0;
   padding: 0 4vw; /* Align cleanly with body margins */
 }
@@ -70,27 +70,17 @@
 }
 
 .logoWrapper {
-  width: auto;
-  max-width: 320px;
-  height: 56px;
+  width: 180px;
+  height: 38px;
   display: flex;
   align-items: center;
 }
 
 .logoImg {
-  width: auto;
-  height: 56px;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: left center;
-}
-
-.headerContainer.scrolled .logoWrapper {
-  height: 46px;
-}
-
-.headerContainer.scrolled .logoImg {
-  height: 46px;
 }
 
 .navMenu {
